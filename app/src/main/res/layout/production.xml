@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/iv_production"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

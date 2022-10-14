@@ -118,4 +118,26 @@ class MoviesViewModel @Inject constructor(private val repository: MoviesReposito
             }
         }
     }
+
+    //get country
+    // get lang
+    val _country: MutableLiveData<ArrayList<ProductionCountry>> by lazy {
+        MutableLiveData<ArrayList<ProductionCountry>>()
+    }
+
+    val country: LiveData<ArrayList<ProductionCountry>>
+        get() = _country
+
+    fun getCountry(apiKey: String, movieId: Int) = viewModelScope.launch {
+        repository.getMovieDetailResults(apiKey, movieId ).let { response ->
+            if (response.isSuccessful) {
+                _country.postValue(
+                    response.body()?.production_countries as
+                            ArrayList<ProductionCountry>?
+                )
+            } else {
+                Log.e("Get Data", "Failed!")
+            }
+        }
+    }
 }

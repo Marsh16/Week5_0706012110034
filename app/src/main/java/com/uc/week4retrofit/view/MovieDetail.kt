@@ -19,6 +19,7 @@ import com.uc.week4retrofit.viewmodel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.os.AsyncTask
 import android.util.Log
+import com.uc.week4retrofit.adapter.CountryAdapter
 
 
 @AndroidEntryPoint
@@ -28,35 +29,36 @@ class MovieDetail : AppCompatActivity() {
     private lateinit var viewModel2: MoviesViewModel
     private lateinit var viewModel3: MoviesViewModel
     private lateinit var viewModel4: MoviesViewModel
+    private lateinit var viewModelcountry: MoviesViewModel
     var player: MediaPlayer? = null
-    private lateinit var adapter: GenreAdapter
-    private lateinit var adapter2: ProductionAdapter
-    private lateinit var adapter4: LanguageAdapter
+    private lateinit var adaptergen: GenreAdapter
+    private lateinit var adapterprod: ProductionAdapter
+    private lateinit var adapterlang: LanguageAdapter
+    private lateinit var adaptercountry: CountryAdapter
 //
 
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        player = MediaPlayer.create(this, com.uc.week4retrofit.R.raw.songkecil);
+        AsyncTask.execute(){
+//sudah berjalan, jika dicoba di hp. kalau emulator laptop tidak muncul suara
+            player?.start()
+            //Toast.makeText(this, "Movie id= ${movieid} ", Toast.LENGTH_LONG).show()
+            Log.e("mskamda","msadma")//coba
+        }
+
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        player = MediaPlayer.create(this, com.uc.week4retrofit.R.raw.songkecil);
-        player?.pause()
-        //jika tidak di pause audio akan terus bermain
-        // kalau mau coba audio menyala atau tidak, line 46 di comment
-        binding.rvGenre.visibility = View.VISIBLE
-        binding.tvTitleMovieDetail.visibility = View.VISIBLE
-        binding.imgPosterMovieDetail.visibility = View.VISIBLE
-        binding.rvLanguage.visibility = View.VISIBLE
-        binding.rvProductionCompany.visibility= View.VISIBLE
-        binding.tvDescription.visibility = View.VISIBLE
-        binding.progressBar.visibility= View.INVISIBLE
-        binding.lang.visibility=View.VISIBLE
+
+
 
         val movieid = intent.getIntExtra("movie_id", 0)
 //        Toast.makeText(applicationContext, "Movie id= ${movieid} ", Toast.LENGTH_SHORT).show()
 
+// backdrop
         viewModel = ViewModelProvider(this)[MoviesViewModel::class.java]
         viewModel.getMovieDetail(Const.API_KEY, movieid)
         viewModel.movieDetails.observe(this, Observer { response ->
@@ -77,48 +79,50 @@ class MovieDetail : AppCompatActivity() {
 
         }
             )
-
+// genre
         viewModel2 = ViewModelProvider(this)[MoviesViewModel::class.java]
         viewModel2.getGenre(Const.API_KEY, movieid)
         viewModel2.genre.observe(this, Observer { response ->
-
             binding.rvGenre.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            adapter = GenreAdapter(response)
-            binding.rvGenre.adapter = adapter
-
-
+            adaptergen = GenreAdapter(response)
+            binding.rvGenre.adapter = adaptergen
         }
         )
+
+        //production company
         viewModel3 = ViewModelProvider(this)[MoviesViewModel::class.java]
         viewModel3.getProduction(Const.API_KEY, movieid)
         viewModel3.production.observe(this, Observer { response ->
-
             binding.rvProductionCompany.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            adapter2 = ProductionAdapter(response)
-            binding.rvProductionCompany.adapter = adapter2
-
-
+            adapterprod = ProductionAdapter(response)
+            binding.rvProductionCompany.adapter = adapterprod
         }
         )
+
+        //language
         viewModel4 = ViewModelProvider(this)[MoviesViewModel::class.java]
         viewModel4.getLanguage(Const.API_KEY, movieid)
         viewModel4.language.observe(this, Observer { response ->
-
             binding.rvLanguage.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            adapter4 = LanguageAdapter(response)
-            binding.rvLanguage.adapter = adapter4
-
+            adapterlang = LanguageAdapter(response)
+            binding.rvLanguage.adapter = adapterlang
 
         }
         )
+
+        //country
+        viewModelcountry = ViewModelProvider(this)[MoviesViewModel::class.java]
+        viewModelcountry.getCountry(Const.API_KEY, movieid)
+        viewModel4.country.observe(this, Observer { response ->
+            binding.rvCountry.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            adaptercountry = CountryAdapter(response)
+            binding.rvCountry.adapter = adaptercountry
+
+        }
+        )
+        player?.pause()
 //        player = MediaPlayer.create(this, com.uc.week4retrofit.R.raw.songkecil);
 //        player?.start()
-        AsyncTask.execute(){
-//sudah berjalan, jika dicoba di hp di emulator laptop tidak muncul suara, jika tidak di pause
-    player?.start()
-            //Toast.makeText(this, "Movie id= ${movieid} ", Toast.LENGTH_LONG).show()
-            Log.e("mskamda","msadma")//coba
-        }
 
 
 
@@ -136,5 +140,6 @@ class MovieDetail : AppCompatActivity() {
 
 
 }
+
 
 

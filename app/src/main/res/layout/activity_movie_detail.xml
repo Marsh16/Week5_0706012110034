@@ -5,7 +5,7 @@
     android:id="@+id/contrainslayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_soft"
+    android:background="@color/white"
     tools:context=".view.MovieDetail">
 
     <ScrollView
@@ -29,7 +29,7 @@
                 android:layout_height="240dp"
                 android:contentDescription="@string/ind"
                 android:scaleType="centerCrop"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +45,7 @@
                 android:textColor="@color/white"
                 android:textSize="34sp"
                 android:textStyle="bold"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@+id/img_poster_movie_detail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rv_genre" />
@@ -80,9 +80,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="20sp"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,8 +94,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Languages:"
-                android:textColor="#FFFFFF"
-                android:visibility="invisible"
+                android:textColor="#000000"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="@+id/tv_description"
                 app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
@@ -103,21 +103,29 @@
                 android:id="@+id/rv_language"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lang" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
+            <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Country:"
+                android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/img_poster_movie_detail" />
+                app:layout_constraintTop_toBottomOf="@+id/rv_language" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_country"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
