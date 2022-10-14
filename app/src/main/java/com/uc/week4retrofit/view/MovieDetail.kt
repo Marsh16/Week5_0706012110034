@@ -96,7 +96,9 @@ class MovieDetail : AppCompatActivity() {
             binding.rvProductionCompany.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             adapterprod = ProductionAdapter(response)
             binding.rvProductionCompany.adapter = adapterprod
+
         }
+
         )
 
         //language
@@ -117,10 +119,10 @@ class MovieDetail : AppCompatActivity() {
             binding.rvCountry.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             adaptercountry = CountryAdapter(response)
             binding.rvCountry.adapter = adaptercountry
-
+            player?.pause()//loading terlama pindah pause setelah ini terload
         }
         )
-        player?.pause()
+
 //        player = MediaPlayer.create(this, com.uc.week4retrofit.R.raw.songkecil);
 //        player?.start()
 
